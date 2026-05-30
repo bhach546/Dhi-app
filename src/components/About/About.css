@@ -1,0 +1,94 @@
+/* ========================================
+   ABOUT COMPONENT CSS
+   ======================================== */
+
+.about {
+  padding: var(--section-padding);
+  background: var(--color-bg-section-alt);
+}
+
+.about-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 26px;
+}
+
+.about-card {
+  background: var(--color-bg-card);
+  border-radius: var(--border-radius-lg);
+  padding: 38px 32px;
+  box-shadow: var(--shadow-sm);
+  border-left: 4px solid transparent;
+  transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+  position: relative;
+}
+
+.about-card:nth-child(1) { border-left-color: var(--color-primary-light); }
+.about-card:nth-child(2) { border-left-color: var(--color-accent-red); }
+.about-card:nth-child(3) { border-left-color: var(--color-accent-cyan); }
+
+.about-card:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-lg);
+}
+
+.about-card-icon {
+  font-size: 42px;
+  margin-bottom: 20px;
+}
+
+.about-card:nth-child(1) .about-card-icon { color: var(--color-primary-light); }
+.about-card:nth-child(2) .about-card-icon { color: var(--color-accent-red); }
+.about-card:nth-child(3) .about-card-icon { color: var(--color-accent-cyan); }
+
+.about-card h3 {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--color-primary);
+  margin-bottom: 14px;
+}
+
+.about-card p {
+  color: var(--color-text-secondary);
+  font-size: 15px;
+  line-height: 1.8;
+}
+
+/* Values list */
+.about-card ul {
+  list-style: none;
+  margin-top: 12px;
+}
+
+.about-card ul li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  color: var(--color-text-secondary);
+  font-size: 14.5px;
+  line-height: 1.6;
+  margin-bottom: 8px;
+}
+
+.about-card ul li::before {
+  content: '✓';
+  color: var(--color-accent-red);
+  font-weight: 700;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .about {
+    padding: var(--section-padding-mobile);
+  }
+
+  .about-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .about-card {
+    padding: 28px 24px;
+  }
+}

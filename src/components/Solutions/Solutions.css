@@ -1,0 +1,107 @@
+/* ========================================
+   SOLUTIONS COMPONENT CSS
+   ======================================== */
+
+.solutions {
+  padding: var(--section-padding);
+  background: var(--color-bg-section-alt);
+}
+
+.solutions-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 26px;
+}
+
+.solution-card {
+  background: var(--color-bg-card);
+  border-radius: var(--border-radius-lg);
+  padding: 38px 28px;
+  text-align: center;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  transition: transform var(--transition), box-shadow var(--transition), background var(--transition);
+  cursor: default;
+  position: relative;
+  overflow: hidden;
+}
+
+.solution-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--color-primary-light), var(--color-accent-red));
+  transform: scaleX(0);
+  transition: transform var(--transition);
+}
+
+.solution-card:hover::before {
+  transform: scaleX(1);
+}
+
+.solution-card:hover {
+  transform: translateY(-10px);
+  box-shadow: var(--shadow-lg);
+  background: var(--color-primary);
+}
+
+.solution-card:hover .solution-icon,
+.solution-card:hover h3,
+.solution-card:hover p {
+  color: #fff;
+}
+
+.solution-icon {
+  font-size: 46px;
+  color: var(--color-primary-light);
+  margin-bottom: 20px;
+  transition: color var(--transition), transform var(--transition);
+}
+
+.solution-card:hover .solution-icon {
+  transform: scale(1.15) rotate(-5deg);
+}
+
+.solution-card h3 {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--color-primary);
+  margin-bottom: 10px;
+  transition: color var(--transition);
+}
+
+.solution-card p {
+  color: var(--color-text-secondary);
+  font-size: 14px;
+  line-height: 1.7;
+  transition: color var(--transition);
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .solutions {
+    padding: var(--section-padding-mobile);
+  }
+
+  .solutions-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+
+  .solution-card {
+    padding: 28px 20px;
+  }
+
+  .solution-icon {
+    font-size: 36px;
+  }
+}
+
+@media (max-width: 480px) {
+  .solutions-grid {
+    grid-template-columns: 1fr;
+  }
+}

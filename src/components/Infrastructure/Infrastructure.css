@@ -1,0 +1,94 @@
+/* ========================================
+   INFRASTRUCTURE COMPONENT CSS
+   ======================================== */
+
+.infrastructure {
+  padding: var(--section-padding);
+  background: var(--color-bg-section);
+}
+
+.infra-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 24px;
+}
+
+.infra-card {
+  background: var(--color-bg-card);
+  border-radius: var(--border-radius-md);
+  padding: 36px 24px;
+  text-align: center;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  transition: transform var(--transition), box-shadow var(--transition);
+  position: relative;
+  overflow: hidden;
+}
+
+.infra-card::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--color-primary-light), var(--color-accent-cyan));
+  transform: scaleX(0);
+  transition: transform var(--transition);
+}
+
+.infra-card:hover::after {
+  transform: scaleX(1);
+}
+
+.infra-card:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-md);
+}
+
+.infra-icon {
+  font-size: 44px;
+  color: var(--color-primary-light);
+  margin-bottom: 16px;
+  transition: transform var(--transition), color var(--transition);
+}
+
+.infra-card:hover .infra-icon {
+  transform: scale(1.2) rotate(-8deg);
+  color: var(--color-accent-red);
+}
+
+.infra-card h3 {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--color-primary);
+  margin-bottom: 8px;
+}
+
+.infra-card p {
+  color: var(--color-text-secondary);
+  font-size: 13.5px;
+  line-height: 1.6;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .infrastructure {
+    padding: var(--section-padding-mobile);
+  }
+
+  .infra-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+
+  .infra-card {
+    padding: 28px 16px;
+  }
+}
+
+@media (max-width: 360px) {
+  .infra-grid {
+    grid-template-columns: 1fr;
+  }
+}

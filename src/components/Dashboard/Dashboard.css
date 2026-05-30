@@ -1,0 +1,119 @@
+/* ========================================
+   DASHBOARD COMPONENT CSS
+   ======================================== */
+
+.dashboard {
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-mid) 50%, var(--color-primary-light) 100%);
+  padding: 80px 8%;
+  position: relative;
+  overflow: hidden;
+}
+
+.dashboard::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.02'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  opacity: 0.4;
+}
+
+.dashboard-title {
+  text-align: center;
+  margin-bottom: 50px;
+  position: relative;
+  z-index: 1;
+}
+
+.dashboard-title h2 {
+  font-size: 38px;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 10px;
+}
+
+.dashboard-title p {
+  color: rgba(255, 255, 255, 0.65);
+  font-size: 16px;
+}
+
+.metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 24px;
+  position: relative;
+  z-index: 1;
+}
+
+.metric-card {
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: var(--border-radius-lg);
+  padding: 36px 28px;
+  text-align: center;
+  transition: transform var(--transition), background var(--transition), box-shadow var(--transition);
+  cursor: default;
+  backdrop-filter: blur(6px);
+}
+
+.metric-card:hover {
+  transform: translateY(-8px);
+  background: rgba(255, 255, 255, 0.12);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.3);
+}
+
+.metric-icon {
+  font-size: 36px;
+  color: var(--color-accent-cyan);
+  margin-bottom: 18px;
+  display: block;
+}
+
+.metric-value {
+  font-size: 50px;
+  font-weight: 800;
+  color: #fff;
+  line-height: 1;
+  margin-bottom: 10px;
+  letter-spacing: -1px;
+}
+
+.metric-value .suffix {
+  color: var(--color-accent-cyan);
+}
+
+.metric-label {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .dashboard {
+    padding: 60px 5%;
+  }
+
+  .dashboard-title h2 {
+    font-size: 28px;
+  }
+
+  .metric-value {
+    font-size: 42px;
+  }
+}
+
+@media (max-width: 480px) {
+  .metrics-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+
+  .metric-card {
+    padding: 24px 16px;
+  }
+
+  .metric-value {
+    font-size: 34px;
+  }
+}

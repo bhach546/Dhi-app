@@ -1,0 +1,209 @@
+/* ========================================
+   NAVBAR COMPONENT CSS
+   ======================================== */
+
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  background: linear-gradient(135deg, var(--color-primary), var(--color-primary-mid));
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  transition: background var(--transition), box-shadow var(--transition);
+}
+
+.navbar.scrolled {
+  background: rgba(3, 27, 52, 0.97);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
+}
+
+.navbar-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 6%;
+  gap: 20px;
+}
+
+/* LOGO AREA */
+.navbar-logo {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-shrink: 0;
+}
+
+.navbar-logo img {
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  transition: transform var(--transition);
+}
+
+.navbar-logo img:hover {
+  transform: rotate(5deg) scale(1.05);
+}
+
+.navbar-logo-text h1 {
+  font-size: 20px;
+  font-weight: 700;
+  color: #fff;
+  line-height: 1.2;
+  letter-spacing: 0.3px;
+}
+
+.navbar-logo-text span {
+  color: var(--color-accent-red);
+}
+
+.navbar-logo-text p {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.65);
+  font-weight: 400;
+  margin-top: 2px;
+  letter-spacing: 0.5px;
+}
+
+/* NAV LINKS */
+.navbar-links {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  list-style: none;
+}
+
+.navbar-links a {
+  font-size: 13.5px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.82);
+  padding: 7px 13px;
+  border-radius: var(--border-radius-full);
+  transition: background var(--transition), color var(--transition);
+  white-space: nowrap;
+}
+
+.navbar-links a:hover,
+.navbar-links a.active {
+  background: var(--color-accent-red);
+  color: #fff;
+}
+
+/* CTA BUTTON */
+.navbar-cta {
+  background: var(--color-accent-red);
+  color: #fff !important;
+  font-weight: 600 !important;
+  padding: 9px 20px !important;
+  border-radius: var(--border-radius-full) !important;
+  transition: background var(--transition), transform var(--transition) !important;
+}
+
+.navbar-cta:hover {
+  background: var(--color-accent-red-hover) !important;
+  transform: translateY(-1px);
+}
+
+/* HAMBURGER */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 6px;
+  z-index: 1100;
+}
+
+.hamburger span {
+  display: block;
+  width: 26px;
+  height: 2.5px;
+  background: #fff;
+  border-radius: 2px;
+  transition: transform 0.35s ease, opacity 0.35s ease;
+  transform-origin: center;
+}
+
+.hamburger.open span:nth-child(1) {
+  transform: translateY(7.5px) rotate(45deg);
+}
+
+.hamburger.open span:nth-child(2) {
+  opacity: 0;
+  transform: scaleX(0);
+}
+
+.hamburger.open span:nth-child(3) {
+  transform: translateY(-7.5px) rotate(-45deg);
+}
+
+/* MOBILE OVERLAY */
+.mobile-menu {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(3, 27, 52, 0.98);
+  backdrop-filter: blur(16px);
+  z-index: 999;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  list-style: none;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.mobile-menu.open {
+  display: flex;
+  opacity: 1;
+  pointer-events: all;
+}
+
+.mobile-menu a {
+  font-size: 22px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.85);
+  padding: 12px 30px;
+  border-radius: var(--border-radius-md);
+  transition: background var(--transition), color var(--transition);
+  text-align: center;
+}
+
+.mobile-menu a:hover {
+  background: var(--color-accent-red);
+  color: #fff;
+}
+
+/* RESPONSIVE */
+@media (max-width: 1024px) {
+  .navbar-links {
+    display: none;
+  }
+
+  .hamburger {
+    display: flex;
+  }
+}
+
+@media (max-width: 480px) {
+  .navbar-inner {
+    padding: 12px 5%;
+  }
+
+  .navbar-logo img {
+    width: 48px;
+    height: 48px;
+  }
+
+  .navbar-logo-text h1 {
+    font-size: 17px;
+  }
+}
