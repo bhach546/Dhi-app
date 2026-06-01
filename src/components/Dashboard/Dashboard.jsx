@@ -1,96 +1,60 @@
-import { useEffect, useRef, useState } from 'react';
-import {
-  FaNetworkWired, FaBroadcastTower, FaUsers, FaCity
-} from 'react-icons/fa';
+import { useState, useEffect, useRef } from 'react';
+import { FaChevronDown } from 'react-icons/fa';
 import './Dashboard.css';
 
-const metrics = [
-  {
-    icon: <FaNetworkWired />,
-    value: 2500,
-    suffix: '+',
-    label: 'KM OFC Backbone Delivered',
-    id: 'metric-ofc',
-  },
-  {
-    icon: <FaBroadcastTower />,
-    value: 180,
-    suffix: '+',
-    label: 'Telecom Experts & Engineers',
-    id: 'metric-experts',
-  },
-  {
-    icon: <FaUsers />,
-    value: 98,
-    suffix: '%',
-    label: 'Project Completion Efficiency',
-    id: 'metric-efficiency',
-  },
-  {
-    icon: <FaCity />,
-    value: 30,
-    suffix: '+',
-    label: 'Coverage Areas Across India',
-    id: 'metric-areas',
-  },
+
+
+const performanceMetrics = [
+  { value: '1000+', label: 'KM OFC Deployed', icon: '🛤' },
+  { value: '60+', label: 'Backbone Routes', icon: '📡' },
+  { value: '80+', label: 'FTTH Rollout Projects', icon: '🏠' },
+  { value: '50+', label: 'HDD Crossings Executed', icon: '🚜' },
+  { value: '30+', label: 'Coverage Areas', icon: '📍' },
+  { value: '70+', label: 'Skilled Workforce', icon: '👷' },
+  { value: '24/7', label: 'Fiber Operations Support', icon: '🔧' },
+  { value: '100+', label: 'FTTH Pole Installations', icon: '⚡' },
+  { value: '40+', label: 'Last Mile Sites', icon: '🌐' },
+  { value: '20+', label: 'Projects Delivered', icon: '✅' },
 ];
 
-function useCountUp(target, duration = 2000, start = false) {
-  const [count, setCount] = useState(0);
+
+function PerformanceDashboard() {
+  const [started, setStarted] = useState(false);
+  const ref = useRef(null);
 
   useEffect(() => {
-    if (!start) return;
-    let startTime = null;
-    const step = (timestamp) => {
-      if (!startTime) startTime = timestamp;
-      const progress = Math.min((timestamp - startTime) / duration, 1);
-      setCount(Math.floor(progress * target));
-      if (progress < 1) requestAnimationFrame(step);
-    };
-    requestAnimationFrame(step);
-  }, [target, duration, start]);
-
-  return count;
-}
-
-function MetricCard({ icon, value, suffix, label, id, started }) {
-  const count = useCountUp(value, 1800, started);
+    const observer = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) { setStarted(true); observer.disconnect(); } },
+      { threshold: 0.2 }
+    );
+    if (ref.current) observer.observe(ref.current);
+    return () => observer.disconnect();
+  }, []);
 
   return (
-    <div className="metric-card reveal" id={id}>
-      <span className="metric-icon">{icon}</span>
-      <div className="metric-value">
-        {count}<span className="suffix">{suffix}</span>
+    <div className="perf-dashboard reveal" id="dash-performance" ref={ref}>
+      <h3>Performance Dashboard</h3>
+      <div className="perf-grid">
+        {performanceMetrics.map((m, i) => (
+          <div
+            className={`perf-metric${started ? ' animate' : ''}`}
+            key={i}
+            style={{ animationDelay: `${i * 0.08}s` }}
+          >
+            <span className="perf-icon">{m.icon}</span>
+            <span className="perf-value">{m.value}</span>
+            <span className="perf-label">{m.label}</span>
+          </div>
+        ))}
       </div>
-      <p className="metric-label">{label}</p>
     </div>
   );
 }
 
 export default function Dashboard() {
-  const [started, setStarted] = useState(false);
-  const sectionRef = useRef(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => { if (entry.isIntersecting) { setStarted(true); observer.disconnect(); } },
-      { threshold: 0.3 }
-    );
-    if (sectionRef.current) observer.observe(sectionRef.current);
-    return () => observer.disconnect();
-  }, []);
-
   return (
-    <section className="dashboard" id="dashboard" ref={sectionRef} aria-label="Key metrics">
-      <div className="dashboard-title">
-        <h2>Telecom Infrastructure at Scale</h2>
-        <p>Enterprise-grade network deployment metrics</p>
-      </div>
-      <div className="metrics-grid">
-        {metrics.map((m) => (
-          <MetricCard key={m.id} {...m} started={started} />
-        ))}
-      </div>
+    <section className="dashboard" id="dashboard" aria-label="DH-INFRA Overview" style={{ paddingTop: '20px' }}>
+      <PerformanceDashboard />
     </section>
   );
 }

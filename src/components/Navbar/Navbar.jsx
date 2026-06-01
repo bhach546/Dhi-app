@@ -5,7 +5,6 @@ const navItems = [
   { label: 'Home', href: '#home' },
   { label: 'Services', href: '#services' },
   { label: 'Solutions', href: '#solutions' },
-  { label: 'Projects', href: '#projects' },
   { label: 'Infrastructure', href: '#infra' },
   { label: 'Quality & Safety', href: '#quality' },
   { label: 'About', href: '#about' },
@@ -57,11 +56,7 @@ export default function Navbar() {
         <div className="navbar-inner">
           {/* Logo */}
           <a className="navbar-logo" href="#home" onClick={() => handleNavClick('#home')} aria-label="DHI Home">
-            <img src="/logo.png" alt="DHI Logo" />
-            <div className="navbar-logo-text">
-              <h1>Delevering Heights <span>INFRA</span></h1>
-              <p>"Connecting Communities, Building Networks"</p>
-            </div>
+            <img src="/images/company-logo-full.png" alt="Delevering Heights INFRA Logo" className="navbar-logo-full" />
           </a>
 
           {/* Desktop Links */}

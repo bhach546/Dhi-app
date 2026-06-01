@@ -4,7 +4,7 @@ import Hero from './components/Hero/Hero';
 import Dashboard from './components/Dashboard/Dashboard';
 import Services from './components/Services/Services';
 import Solutions from './components/Solutions/Solutions';
-import Projects from './components/Projects/Projects';
+
 import Infrastructure from './components/Infrastructure/Infrastructure';
 import QualitySafety from './components/QualitySafety/QualitySafety';
 import About from './components/About/About';
@@ -44,7 +44,7 @@ export default function App() {
         <Dashboard />
         <Services />
         <Solutions />
-        <Projects />
+
         <Infrastructure />
         <QualitySafety />
         <About />

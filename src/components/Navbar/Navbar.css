@@ -37,36 +37,14 @@
 }
 
 .navbar-logo img {
-  width: 58px;
-  height: 58px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 2px solid rgba(255, 255, 255, 0.3);
+  width: auto;
+  height: 60px;
+  object-fit: contain;
   transition: transform var(--transition);
 }
 
 .navbar-logo img:hover {
-  transform: rotate(5deg) scale(1.05);
-}
-
-.navbar-logo-text h1 {
-  font-size: 20px;
-  font-weight: 700;
-  color: #fff;
-  line-height: 1.2;
-  letter-spacing: 0.3px;
-}
-
-.navbar-logo-text span {
-  color: var(--color-accent-red);
-}
-
-.navbar-logo-text p {
-  font-size: 11px;
-  color: rgba(255, 255, 255, 0.65);
-  font-weight: 400;
-  margin-top: 2px;
-  letter-spacing: 0.5px;
+  transform: scale(1.03);
 }
 
 /* NAV LINKS */
@@ -199,11 +177,6 @@
   }
 
   .navbar-logo img {
-    width: 48px;
     height: 48px;
-  }
-
-  .navbar-logo-text h1 {
-    font-size: 17px;
   }
 }

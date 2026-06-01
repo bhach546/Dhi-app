@@ -1,5 +1,5 @@
 /* ========================================
-   INFRASTRUCTURE COMPONENT CSS
+   INFRASTRUCTURE COMPONENT CSS – Image-based
    ======================================== */
 
 .infrastructure {
@@ -9,20 +9,18 @@
 
 .infra-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-template-columns: repeat(4, 1fr);
   gap: 24px;
 }
 
 .infra-card {
   background: var(--color-bg-card);
-  border-radius: var(--border-radius-md);
-  padding: 36px 24px;
-  text-align: center;
+  border-radius: var(--border-radius-lg);
+  overflow: hidden;
   box-shadow: var(--shadow-sm);
   border: 1px solid rgba(0, 0, 0, 0.05);
   transition: transform var(--transition), box-shadow var(--transition);
   position: relative;
-  overflow: hidden;
 }
 
 .infra-card::after {
@@ -43,35 +41,50 @@
 
 .infra-card:hover {
   transform: translateY(-8px);
-  box-shadow: var(--shadow-md);
+  box-shadow: var(--shadow-lg);
 }
 
-.infra-icon {
-  font-size: 44px;
-  color: var(--color-primary-light);
-  margin-bottom: 16px;
-  transition: transform var(--transition), color var(--transition);
+.infra-card-image {
+  height: 200px;
+  overflow: hidden;
 }
 
-.infra-card:hover .infra-icon {
-  transform: scale(1.2) rotate(-8deg);
-  color: var(--color-accent-red);
+.infra-card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
 }
 
-.infra-card h3 {
+.infra-card:hover .infra-card-image img {
+  transform: scale(1.08);
+}
+
+.infra-card-body {
+  padding: 20px;
+  text-align: center;
+}
+
+.infra-card-body h3 {
   font-size: 17px;
   font-weight: 700;
   color: var(--color-primary);
   margin-bottom: 8px;
 }
 
-.infra-card p {
+.infra-card-body p {
   color: var(--color-text-secondary);
-  font-size: 13.5px;
+  font-size: 13px;
   line-height: 1.6;
 }
 
 /* RESPONSIVE */
+@media (max-width: 1024px) {
+  .infra-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
 @media (max-width: 768px) {
   .infrastructure {
     padding: var(--section-padding-mobile);
@@ -81,13 +94,9 @@
     grid-template-columns: repeat(2, 1fr);
     gap: 16px;
   }
-
-  .infra-card {
-    padding: 28px 16px;
-  }
 }
 
-@media (max-width: 360px) {
+@media (max-width: 480px) {
   .infra-grid {
     grid-template-columns: 1fr;
   }

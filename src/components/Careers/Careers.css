@@ -1,5 +1,5 @@
 /* ========================================
-   CAREERS COMPONENT CSS
+   CAREERS COMPONENT CSS – Board Cards
    ======================================== */
 
 .careers {
@@ -7,21 +7,41 @@
   background: var(--color-bg-section);
 }
 
+.careers-subtitle {
+  text-align: center;
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--color-primary);
+  margin-bottom: 30px;
+  position: relative;
+}
+
+.careers-subtitle::after {
+  content: '';
+  display: block;
+  width: 60px;
+  height: 3px;
+  background: var(--color-accent-red);
+  margin: 10px auto 0;
+  border-radius: 2px;
+}
+
 .careers-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   gap: 22px;
 }
 
 .career-card {
   background: var(--color-bg-card);
   border-radius: var(--border-radius-md);
-  padding: 32px 22px;
+  padding: 32px 22px 28px;
   text-align: center;
   box-shadow: var(--shadow-sm);
   border: 1px solid rgba(0, 0, 0, 0.05);
   transition: transform var(--transition), box-shadow var(--transition), background var(--transition);
   cursor: pointer;
+  position: relative;
 }
 
 .career-card:hover {
@@ -59,10 +79,29 @@
   font-size: 13px;
   line-height: 1.6;
   transition: color var(--transition);
+  margin-bottom: 14px;
 }
 
 .career-card:hover p {
   color: rgba(255, 255, 255, 0.65);
+}
+
+.career-badge {
+  display: inline-block;
+  background: rgba(0, 198, 255, 0.12);
+  color: var(--color-accent-cyan);
+  padding: 4px 14px;
+  border-radius: var(--border-radius-full);
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: background var(--transition), color var(--transition);
+}
+
+.career-card:hover .career-badge {
+  background: rgba(0, 198, 255, 0.25);
+  color: #fff;
 }
 
 /* CTA Banner */
@@ -108,6 +147,7 @@
   border-radius: var(--border-radius-full);
   font-size: 16px;
   font-weight: 700;
+  cursor: pointer;
   transition: background var(--transition), transform var(--transition);
   position: relative;
   z-index: 1;

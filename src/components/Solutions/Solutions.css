@@ -1,5 +1,9 @@
 /* ========================================
-   SOLUTIONS COMPONENT CSS
+   SOLUTIONS – CSS
+   Layout per TABS.docx:
+   Card TOP: Image LEFT | Short note RIGHT
+   Card BOTTOM: Two buttons – "Industry Challenges" | "Our Solutions & Coverage"
+   Each button independently expands its content below
    ======================================== */
 
 .solutions {
@@ -7,101 +11,288 @@
   background: var(--color-bg-section-alt);
 }
 
+.solutions-intro-text {
+  color: var(--color-text-secondary);
+  font-size: 15px;
+  line-height: 1.75;
+  margin-top: 10px;
+  margin-bottom: 0;
+}
+
+/* ─── GRID: 3 cards per row ─── */
 .solutions-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 26px;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
 }
 
-.solution-card {
+/* ─── CARD ─── */
+.sol-card {
   background: var(--color-bg-card);
   border-radius: var(--border-radius-lg);
-  padding: 38px 28px;
-  text-align: center;
+  overflow: hidden;
   box-shadow: var(--shadow-sm);
-  border: 1px solid rgba(0, 0, 0, 0.05);
-  transition: transform var(--transition), box-shadow var(--transition), background var(--transition);
-  cursor: default;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  transition: box-shadow var(--transition);
+}
+
+.sol-card:hover {
+  box-shadow: var(--shadow-lg);
+}
+
+/* ─── TOP: Image full-width on top, note below ─── */
+.sol-card-top {
+  display: flex;
+  flex-direction: column;
+}
+
+.sol-card-image {
   position: relative;
   overflow: hidden;
+  height: 210px;
 }
 
-.solution-card::before {
-  content: '';
+.sol-card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+.sol-card:hover .sol-card-image img {
+  transform: scale(1.05);
+}
+
+.sol-card-tag {
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 4px;
-  background: linear-gradient(90deg, var(--color-primary-light), var(--color-accent-red));
-  transform: scaleX(0);
-  transition: transform var(--transition);
+  top: 12px;
+  left: 12px;
+  background: var(--color-accent-red, #dc2626);
+  color: #fff;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 20px;
 }
 
-.solution-card:hover::before {
-  transform: scaleX(1);
+/* Note area below image */
+.sol-card-info {
+  padding: 20px 24px 4px;
+  display: flex;
+  flex-direction: column;
 }
 
-.solution-card:hover {
-  transform: translateY(-10px);
-  box-shadow: var(--shadow-lg);
+.sol-card-title {
+  font-size: 17px;
+  font-weight: 800;
+  color: var(--color-primary);
+  line-height: 1.3;
+  margin: 0 0 10px;
+}
+
+.sol-card-note {
+  font-size: 13.5px;
+  color: var(--color-text-secondary);
+  line-height: 1.75;
+  margin: 0;
+}
+
+/* ─── BOTTOM: Two-button tabs & content ─── */
+.sol-card-bottom {
+  padding-bottom: 8px;
+}
+
+.sol-tabs {
+  display: flex;
+  gap: 12px;
+  padding: 0 24px 20px;
+}
+
+/* Panel button */
+.sol-tab-btn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 10px 14px;
+  background: var(--color-primary-light);
+  border: none;
+  border-radius: var(--border-radius-full);
+  color: #fff;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.2px;
+  transition: all var(--transition);
+  text-align: center;
+}
+
+.sol-tab-btn:hover {
+  background: var(--color-accent-red, #dc2626);
+  transform: translateY(-1px);
+}
+
+.sol-tab-btn.active {
   background: var(--color-primary);
 }
 
-.solution-card:hover .solution-icon,
-.solution-card:hover h3,
-.solution-card:hover p {
-  color: #fff;
+.sol-btn-icon {
+  font-size: 12px;
+  flex-shrink: 0;
+  transition: transform 0.3s ease;
 }
 
-.solution-icon {
-  font-size: 46px;
-  color: var(--color-primary-light);
-  margin-bottom: 20px;
-  transition: color var(--transition), transform var(--transition);
+/* Spacer to push chevron to the right */
+.sol-tab-btn .sol-btn-icon:first-of-type {
+  margin-right: 0;
 }
 
-.solution-card:hover .solution-icon {
-  transform: scale(1.15) rotate(-5deg);
+.sol-chevron {
+  font-size: 11px;
+  margin-left: auto;
+  transition: transform 0.3s ease;
+  color: inherit;
+  opacity: 0.7;
 }
 
-.solution-card h3 {
-  font-size: 20px;
+.sol-chevron.rotated {
+  transform: rotate(180deg);
+}
+
+/* Panel expand/collapse content */
+.sol-panel-content {
+  overflow: hidden;
+  max-height: 0;
+  opacity: 0;
+  transition: max-height 0.5s ease, opacity 0.4s ease;
+}
+
+.sol-panel-content--open {
+  max-height: 800px;
+  opacity: 1;
+}
+
+.sol-panel-section {
+  padding: 0 28px 18px;
+}
+
+.sol-panel-section:first-child {
+  padding-top: 4px;
+}
+
+.sol-panel-heading {
+  font-size: 12px;
   font-weight: 700;
-  color: var(--color-primary);
+  color: var(--color-primary-light);
+  text-transform: uppercase;
+  letter-spacing: 0.7px;
+  margin: 0 0 10px;
+}
+
+.sol-panel-text {
+  font-size: 13px;
+  color: #555;
+  line-height: 1.75;
+  margin: 0 0 10px;
+}
+
+.sol-panel-text--sub {
+  font-size: 12.5px;
+  color: #666;
+  font-style: italic;
   margin-bottom: 10px;
-  transition: color var(--transition);
 }
 
-.solution-card p {
-  color: var(--color-text-secondary);
-  font-size: 14px;
-  line-height: 1.7;
-  transition: color var(--transition);
+/* Lists */
+.sol-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2px 16px;
 }
 
-/* RESPONSIVE */
+.sol-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  font-size: 13px;
+  color: #555;
+  line-height: 1.6;
+  padding: 2px 0;
+}
+
+.sol-check {
+  color: var(--color-primary-light);
+  font-size: 10px;
+  margin-top: 3px;
+  flex-shrink: 0;
+}
+
+.sol-dot {
+  color: var(--color-accent-red, #dc2626);
+  font-size: 7px;
+  margin-top: 5px;
+  flex-shrink: 0;
+}
+
+/* Coverage list */
+.sol-list--coverage {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.sol-list--coverage li {
+  color: #444;
+  font-size: 13px;
+}
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 1200px) {
+  .solutions-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 900px) {
+  .solutions-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 @media (max-width: 768px) {
   .solutions {
     padding: var(--section-padding-mobile);
   }
 
-  .solutions-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 16px;
+  .sol-card-image {
+    height: 180px;
   }
 
-  .solution-card {
-    padding: 28px 20px;
+  .sol-card-info {
+    padding: 16px;
   }
 
-  .solution-icon {
-    font-size: 36px;
+  .sol-card-title {
+    font-size: 16px;
   }
-}
 
-@media (max-width: 480px) {
-  .solutions-grid {
-    grid-template-columns: 1fr;
+  .sol-tab-btn {
+    padding: 10px;
+    font-size: 11.5px;
+    flex-direction: column;
+    gap: 4px;
+    border-radius: var(--border-radius-lg);
+  }
+  
+  .sol-chevron {
+    display: none;
+  }
+
+  .sol-panel-section {
+    padding: 0 16px 14px;
   }
 }

@@ -1,10 +1,10 @@
 /* ========================================
-   DASHBOARD COMPONENT CSS
+   DASHBOARD / STATS COMPONENT CSS
    ======================================== */
 
 .dashboard {
   background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-mid) 50%, var(--color-primary-light) 100%);
-  padding: 80px 8%;
+  padding: 40px 8% 80px;
   position: relative;
   overflow: hidden;
 }
@@ -17,103 +17,106 @@
   opacity: 0.4;
 }
 
-.dashboard-title {
-  text-align: center;
-  margin-bottom: 50px;
+/* ---- Performance Dashboard ---- */
+.perf-dashboard {
   position: relative;
   z-index: 1;
+  padding: 40px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--border-radius-lg);
+  backdrop-filter: blur(8px);
 }
 
-.dashboard-title h2 {
-  font-size: 38px;
+.perf-dashboard h3 {
+  text-align: center;
+  font-size: 26px;
   font-weight: 700;
   color: #fff;
+  margin-bottom: 30px;
+}
+
+.perf-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 18px;
+}
+
+.perf-metric {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 20px 12px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--border-radius-md);
+  transition: transform var(--transition), background var(--transition);
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.perf-metric.animate {
+  animation: perf-appear 0.5s ease forwards;
+}
+
+@keyframes perf-appear {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.perf-metric:hover {
+  transform: translateY(-5px);
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.perf-icon {
+  font-size: 28px;
   margin-bottom: 10px;
 }
 
-.dashboard-title p {
-  color: rgba(255, 255, 255, 0.65);
-  font-size: 16px;
-}
-
-.metrics-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 24px;
-  position: relative;
-  z-index: 1;
-}
-
-.metric-card {
-  background: rgba(255, 255, 255, 0.07);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: var(--border-radius-lg);
-  padding: 36px 28px;
-  text-align: center;
-  transition: transform var(--transition), background var(--transition), box-shadow var(--transition);
-  cursor: default;
-  backdrop-filter: blur(6px);
-}
-
-.metric-card:hover {
-  transform: translateY(-8px);
-  background: rgba(255, 255, 255, 0.12);
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.3);
-}
-
-.metric-icon {
-  font-size: 36px;
-  color: var(--color-accent-cyan);
-  margin-bottom: 18px;
-  display: block;
-}
-
-.metric-value {
-  font-size: 50px;
+.perf-value {
+  font-size: 28px;
   font-weight: 800;
   color: #fff;
   line-height: 1;
-  margin-bottom: 10px;
-  letter-spacing: -1px;
+  margin-bottom: 6px;
 }
 
-.metric-value .suffix {
-  color: var(--color-accent-cyan);
-}
-
-.metric-label {
-  color: rgba(255, 255, 255, 0.7);
-  font-size: 14px;
+.perf-label {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 12px;
   font-weight: 500;
   line-height: 1.4;
 }
 
-/* RESPONSIVE */
+/* ---- RESPONSIVE ---- */
+@media (max-width: 1024px) {
+  .perf-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
 @media (max-width: 768px) {
   .dashboard {
-    padding: 60px 5%;
+    padding: 20px 5% 60px;
   }
 
-  .dashboard-title h2 {
-    font-size: 28px;
+  .perf-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
   }
 
-  .metric-value {
-    font-size: 42px;
+  .perf-dashboard {
+    padding: 24px;
   }
 }
 
 @media (max-width: 480px) {
-  .metrics-grid {
+  .perf-grid {
     grid-template-columns: repeat(2, 1fr);
-    gap: 16px;
   }
 
-  .metric-card {
-    padding: 24px 16px;
-  }
-
-  .metric-value {
-    font-size: 34px;
+  .perf-value {
+    font-size: 22px;
   }
 }

@@ -24,6 +24,8 @@ export default function Careers() {
         <p>Be part of a growing telecom infrastructure company building India's digital future.</p>
       </div>
 
+      <h3 className="careers-subtitle">Current Openings</h3>
+
       <div className="careers-grid">
         {roles.map((role, i) => (
           <div
@@ -34,6 +36,7 @@ export default function Careers() {
             <div className="career-icon">{role.icon}</div>
             <h3>{role.title}</h3>
             <p>{role.desc}</p>
+            <span className="career-badge">Open Position</span>
           </div>
         ))}
       </div>

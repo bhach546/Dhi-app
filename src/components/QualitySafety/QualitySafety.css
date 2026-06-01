@@ -1,5 +1,5 @@
 /* ========================================
-   QUALITY & SAFETY COMPONENT CSS
+   QUALITY & SAFETY COMPONENT CSS – Redesigned
    ======================================== */
 
 .quality {
@@ -20,15 +20,19 @@
   border-radius: 50%;
 }
 
-.quality-grid {
+/* ──── 3-per-row Grid Layout ──── */
+.quality-list {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 28px;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
   position: relative;
   z-index: 1;
 }
 
-.quality-card {
+.quality-row {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
   background: rgba(255, 255, 255, 0.06);
   border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: var(--border-radius-lg);
@@ -36,63 +40,95 @@
   transition: transform var(--transition), background var(--transition), box-shadow var(--transition);
 }
 
-.quality-card:hover {
-  transform: translateY(-8px);
+.quality-row:hover {
+  transform: translateY(-6px);
   background: rgba(255, 255, 255, 0.1);
   box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
 }
 
-.quality-card-image {
-  height: 220px;
+.quality-row-image {
+  width: 100%;
+  min-height: 200px;
+  max-height: 220px;
   overflow: hidden;
   position: relative;
 }
 
-.quality-card-image img {
+.quality-row-image img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   transition: transform 0.6s ease;
-  filter: brightness(0.7);
+  filter: brightness(0.75);
 }
 
-.quality-card:hover .quality-card-image img {
-  transform: scale(1.06);
-  filter: brightness(0.85);
+.quality-row:hover .quality-row-image img {
+  transform: scale(1.05);
+  filter: brightness(0.9);
 }
 
-.quality-card-body {
-  padding: 28px;
+.quality-row-content {
+  padding: 22px 26px 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex: 1;
 }
 
-.quality-card-body h3 {
-  font-size: 22px;
+.quality-row-content h3 {
+  font-size: 18px;
   font-weight: 700;
   color: #fff;
-  margin-bottom: 12px;
+  margin-bottom: 10px;
 }
 
-.quality-card-body p {
+.quality-row-content > p {
   color: rgba(255, 255, 255, 0.65);
-  font-size: 14.5px;
-  line-height: 1.75;
-  margin-bottom: 18px;
+  font-size: 13.5px;
+  line-height: 1.7;
+  margin-bottom: 14px;
 }
 
+/* Details expand */
 .quality-details {
   overflow: hidden;
   max-height: 0;
   opacity: 0;
   transition: max-height 0.45s ease, opacity 0.4s ease;
-  color: rgba(255, 255, 255, 0.5);
-  font-size: 14px;
-  line-height: 1.75;
 }
 
 .quality-details.expanded {
-  max-height: 150px;
+  max-height: 400px;
   opacity: 1;
   margin-bottom: 16px;
+}
+
+.quality-details h4 {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--color-accent-cyan);
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.quality-details ul {
+  list-style: none;
+  padding: 0;
+}
+
+.quality-details ul li {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 13.5px;
+  line-height: 1.7;
+  margin-bottom: 4px;
+}
+
+/* Action buttons row */
+.quality-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
 }
 
 .quality-btn {
@@ -104,8 +140,9 @@
   color: #fff;
   padding: 10px 20px;
   border-radius: var(--border-radius-full);
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 600;
+  cursor: pointer;
   transition: background var(--transition), border-color var(--transition);
 }
 
@@ -116,19 +153,164 @@
 
 .quality-btn svg {
   transition: transform 0.3s ease;
+  font-size: 12px;
 }
 
 .quality-btn.active svg {
   transform: rotate(180deg);
 }
 
+.process-flow-btn {
+  border-color: var(--color-accent-cyan);
+  color: var(--color-accent-cyan);
+}
+
+.process-flow-btn:hover {
+  background: var(--color-accent-cyan);
+  border-color: var(--color-accent-cyan);
+  color: var(--color-primary);
+}
+
+/* ---- Safety Commitment (always visible) ---- */
+.safety-commitment {
+  margin-top: 40px;
+  display: grid;
+  grid-template-columns: 380px 1fr;
+  gap: 0;
+  background: rgba(255, 77, 77, 0.12);
+  border: 2px solid rgba(255, 77, 77, 0.3);
+  border-radius: var(--border-radius-lg);
+  overflow: hidden;
+  position: relative;
+  z-index: 1;
+}
+
+.safety-commitment-image {
+  height: 100%;
+  min-height: 240px;
+  overflow: hidden;
+}
+
+.safety-commitment-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.8);
+}
+
+.safety-commitment-content {
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.safety-commitment-content h3 {
+  font-size: 26px;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 16px;
+}
+
+.safety-commitment-content p {
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 16px;
+  line-height: 1.85;
+}
+
+/* ---- Process Flow Modal ---- */
+.process-flow-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+  padding: 40px;
+  animation: fade-in 0.3s ease;
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.process-flow-modal {
+  position: relative;
+  max-width: 1000px;
+  max-height: 90vh;
+  background: #fff;
+  border-radius: var(--border-radius-lg);
+  overflow: hidden;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6);
+}
+
+.process-flow-modal img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.modal-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: var(--color-accent-red);
+  color: #fff;
+  border: none;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  cursor: pointer;
+  z-index: 1;
+  transition: transform var(--transition);
+}
+
+.modal-close:hover {
+  transform: scale(1.1);
+}
+
 /* RESPONSIVE */
+@media (max-width: 1200px) {
+  .quality-list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 900px) {
+  .quality-list {
+    grid-template-columns: 1fr;
+  }
+
+  .safety-commitment {
+    grid-template-columns: 1fr;
+  }
+
+  .safety-commitment-image {
+    min-height: 200px;
+    max-height: 230px;
+  }
+}
+
 @media (max-width: 768px) {
   .quality {
     padding: var(--section-padding-mobile);
   }
 
-  .quality-grid {
-    grid-template-columns: 1fr;
+  .quality-row-content {
+    padding: 18px;
+  }
+
+  .safety-commitment-content {
+    padding: 24px;
+  }
+
+  .process-flow-overlay {
+    padding: 16px;
   }
 }

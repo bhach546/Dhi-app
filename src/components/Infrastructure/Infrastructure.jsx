@@ -1,57 +1,53 @@
-import {
-  FaTools, FaCogs, FaPlug, FaChartLine, FaMap, FaTruck,
-  FaHardHat, FaWrench,
-} from 'react-icons/fa';
 import './Infrastructure.css';
 
 const equipments = [
   {
     id: 'infra-hdd',
-    icon: <FaTools />,
+    image: '/images/infrastructure/HDD.png',
     title: 'HDD Machines',
     desc: 'Advanced horizontal directional drilling rigs for trenchless utility crossings.',
   },
   {
     id: 'infra-blowing',
-    icon: <FaCogs />,
+    image: '/images/infrastructure/OFC.png',
     title: 'OFC Blowing Machines',
     desc: 'High-speed cable blowing equipment for efficient fiber installation.',
   },
   {
     id: 'infra-splicer',
-    icon: <FaPlug />,
+    image: '/images/infrastructure/Fusionsplicer.png',
     title: 'Fusion Splicers',
     desc: 'Precision fusion splicers for low-loss fiber optic connections.',
   },
   {
     id: 'infra-otdr',
-    icon: <FaChartLine />,
+    image: '/images/infrastructure/OTDR.png',
     title: 'OTDR Equipment',
     desc: 'Optical time-domain reflectometers for network testing and commissioning.',
   },
   {
     id: 'infra-survey',
-    icon: <FaMap />,
+    image: '/images/infrastructure/Surveyequipemt.png',
     title: 'Survey Equipment',
     desc: 'GPS and GIS-enabled tools for accurate route survey and mapping.',
   },
   {
     id: 'infra-fleet',
-    icon: <FaTruck />,
+    image: '/images/infrastructure/Fleet_logistic.png',
     title: 'Fleet & Logistics',
     desc: 'Dedicated fleet of vehicles for material transport and field operations.',
   },
   {
-    id: 'infra-safety',
-    icon: <FaHardHat />,
-    title: 'Safety Gear',
-    desc: 'Full PPE and EHS-compliant safety equipment for all field activities.',
+    id: 'infra-field',
+    image: '/images/infrastructure/Fieldteams.png',
+    title: 'Field Teams',
+    desc: 'Skilled field teams equipped for on-site telecom infrastructure deployment.',
   },
   {
-    id: 'infra-tools',
-    icon: <FaWrench />,
-    title: 'Specialized Tools',
-    desc: 'Comprehensive toolkit for civil and telecom infrastructure operations.',
+    id: 'infra-restoration',
+    image: '/images/infrastructure/Restorationteams.png',
+    title: 'Restoration Teams',
+    desc: 'Dedicated restoration teams for emergency network repair and fault resolution.',
   },
 ];
 
@@ -71,9 +67,13 @@ export default function Infrastructure() {
             key={item.id}
             id={item.id}
           >
-            <div className="infra-icon">{item.icon}</div>
-            <h3>{item.title}</h3>
-            <p>{item.desc}</p>
+            <div className="infra-card-image">
+              <img src={item.image} alt={item.title} loading="lazy" />
+            </div>
+            <div className="infra-card-body">
+              <h3>{item.title}</h3>
+              <p>{item.desc}</p>
+            </div>
           </div>
         ))}
       </div>
