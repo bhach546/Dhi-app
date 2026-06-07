@@ -226,7 +226,8 @@ const additionalServices = [
 
 /* ─── CARD: Image top → short note → "View Details" button → expands overview + services + equipment ─── */
 function ServiceCard({ svc, index, isPrimary }) {
-  const [open, setOpen] = useState(false);
+  const [openOverview, setOpenOverview] = useState(false);
+  const [openServices, setOpenServices] = useState(false);
 
   return (
     <article
@@ -246,11 +247,11 @@ function ServiceCard({ svc, index, isPrimary }) {
         {/* Short note always visible */}
         <p className="svc-card-note">{svc.note}</p>
 
-        {/* Expandable: View Details → overview + services + equipment */}
+        {/* Expandable: Overview */}
         <div
-          id={`svc-details-${svc.id}`}
-          className={`svc-details${open ? ' svc-details--open' : ''}`}
-          aria-hidden={!open}
+          id={`svc-overview-${svc.id}`}
+          className={`svc-details${openOverview ? ' svc-details--open' : ''}`}
+          aria-hidden={!openOverview}
         >
           {svc.overview && (
             <div className="svc-detail-block">
@@ -258,7 +259,14 @@ function ServiceCard({ svc, index, isPrimary }) {
               <p className="svc-detail-text">{svc.overview}</p>
             </div>
           )}
+        </div>
 
+        {/* Expandable: Services & Equipment */}
+        <div
+          id={`svc-services-${svc.id}`}
+          className={`svc-details${openServices ? ' svc-details--open' : ''}`}
+          aria-hidden={!openServices}
+        >
           <div className="svc-detail-columns">
             {svc.servicesList && (
               <div className="svc-detail-block">
@@ -287,17 +295,30 @@ function ServiceCard({ svc, index, isPrimary }) {
           </div>
         </div>
 
-        {/* Toggle button */}
-        <button
-          id={`toggle-${svc.id}`}
-          className={`svc-toggle-btn${open ? ' svc-toggle-btn--active' : ''}`}
-          onClick={() => setOpen(p => !p)}
-          aria-expanded={open}
-          aria-controls={`svc-details-${svc.id}`}
-        >
-          {open ? 'Hide Details' : 'View Details'}
-          <FaChevronDown className="svc-toggle-icon" />
-        </button>
+        {/* Toggle buttons */}
+        <div className="svc-card-actions">
+          <button
+            id={`toggle-overview-${svc.id}`}
+            className={`svc-toggle-btn${openOverview ? ' svc-toggle-btn--active' : ''}`}
+            onClick={() => setOpenOverview(p => !p)}
+            aria-expanded={openOverview}
+            aria-controls={`svc-overview-${svc.id}`}
+          >
+            {openOverview ? 'Hide Details' : 'View Details'}
+            <FaChevronDown className="svc-toggle-icon" />
+          </button>
+
+          <button
+            id={`toggle-services-${svc.id}`}
+            className={`svc-toggle-btn${openServices ? ' svc-toggle-btn--active' : ''}`}
+            onClick={() => setOpenServices(p => !p)}
+            aria-expanded={openServices}
+            aria-controls={`svc-services-${svc.id}`}
+          >
+            {openServices ? 'Hide Services' : 'Services we provide & equipments'}
+            <FaChevronDown className="svc-toggle-icon" />
+          </button>
+        </div>
       </div>
     </article>
   );

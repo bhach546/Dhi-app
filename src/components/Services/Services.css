@@ -269,32 +269,52 @@
   font-style: italic;
 }
 
-/* ─── TOGGLE BUTTON ─── */
-.svc-toggle-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 7px;
-  background: var(--color-primary-light);
-  color: #fff;
-  border: none;
-  padding: 9px 18px;
-  border-radius: var(--border-radius-full);
-  font-size: 12.5px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background var(--transition), transform var(--transition);
-  align-self: flex-start;
+/* ─── TOGGLE BUTTONS ─── */
+.svc-card-actions {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 8px;
   margin-top: auto;
 }
 
+.svc-toggle-btn {
+  flex: 1 1 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  background: #f4f7fa;
+  color: var(--color-primary);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  padding: 10px 12px;
+  border-radius: 8px;
+  font-size: 11.5px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: center;
+  line-height: 1.3;
+}
+
 .svc-toggle-btn:hover {
+  background: var(--color-primary-light);
+  color: #fff;
+  border-color: var(--color-primary-light);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+}
+
+.svc-toggle-btn--active {
   background: var(--color-accent-red, #dc2626);
-  transform: translateY(-1px);
+  color: #fff;
+  border-color: var(--color-accent-red, #dc2626);
 }
 
 .svc-toggle-icon {
-  font-size: 11px;
+  font-size: 10px;
   transition: transform 0.3s ease;
+  flex-shrink: 0;
 }
 
 .svc-toggle-btn--active .svc-toggle-icon {
