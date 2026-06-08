@@ -52,6 +52,14 @@ function PerformanceDashboard() {
 }
 
 export default function Dashboard() {
+  const [showMainDashboard, setShowMainDashboard] = useState(false);
+
+  useEffect(() => {
+    setShowMainDashboard(sessionStorage.getItem('showMainDashboard') === 'true');
+  }, []);
+
+  if (!showMainDashboard) return null;
+
   return (
     <section className="dashboard" id="dashboard" aria-label="DH-INFRA Overview" style={{ paddingTop: '20px' }}>
       <PerformanceDashboard />

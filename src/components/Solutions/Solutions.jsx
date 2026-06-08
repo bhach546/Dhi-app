@@ -7,7 +7,7 @@ const solutions = [
   {
     id: 'sol-telecom',
     image: '/images/solutions/Telecomoperators.png',
-    title: 'Telecom Operator Solutions',
+    title: 'Telecom Operator s',
     note: 'DH-INFRA delivers end-to-end telecom infrastructure solutions that support network expansion, backbone deployment, FTTH rollouts, and reliable fiber connectivity for telecom operators.',
     overview: 'DH-INFRA delivers end-to-end telecom infrastructure solutions that enable operators to expand network coverage, accelerate fiber deployment, improve service reliability, and support growing bandwidth demands.',
     challengesNote: 'Telecom operators face increasing pressure to expand network reach, support growing subscriber demand, reduce deployment timelines, and maintain reliable connectivity across diverse geographies.',
@@ -270,7 +270,6 @@ function SolutionCard({ sol, index }) {
       <div className="sol-card-top">
         <div className="sol-card-image">
           <img src={sol.image} alt={sol.title} loading="lazy" />
-          <span className="sol-card-tag">Solution</span>
         </div>
         <div className="sol-card-info">
           <h3 className="sol-card-title">{sol.title}</h3>

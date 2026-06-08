@@ -237,7 +237,6 @@ function ServiceCard({ svc, index, isPrimary }) {
       {/* IMAGE */}
       <div className="svc-card-image">
         <img src={svc.image} alt={svc.alt} loading="lazy" />
-        {isPrimary && <span className="svc-badge">Core Service</span>}
       </div>
 
       {/* BODY */}

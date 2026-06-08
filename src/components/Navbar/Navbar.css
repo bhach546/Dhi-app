@@ -161,6 +161,23 @@
 }
 
 /* RESPONSIVE */
+@media (max-width: 1280px) {
+  .navbar-inner {
+    padding: 12px 2%;
+    gap: 10px;
+  }
+  .navbar-logo img {
+    height: 50px;
+  }
+  .navbar-links {
+    gap: 2px;
+  }
+  .navbar-links a {
+    padding: 6px 10px;
+    font-size: 13px;
+  }
+}
+
 @media (max-width: 1024px) {
   .navbar-links {
     display: none;
@@ -177,6 +194,6 @@
   }
 
   .navbar-logo img {
-    height: 48px;
+    height: 40px;
   }
 }
