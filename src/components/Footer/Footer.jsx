@@ -65,10 +65,7 @@ export default function Footer() {
             ))}
           </div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '6px', marginTop: '8px' }}>
-            <a href="tel:+919876543210" style={{ display: 'flex', alignItems: 'center', gap: '10px', color: 'rgba(255,255,255,0.6)', fontSize: '14px' }}>
-              <FaPhoneAlt style={{ color: 'var(--color-accent-red)' }} /> +91 98765 43210
-            </a>
-            <a href="mailto:info@dhiinfra.com" style={{ display: 'flex', alignItems: 'center', gap: '10px', color: 'rgba(255,255,255,0.6)', fontSize: '14px' }}>
+            <a href="mailto:info@dh-infra.com" style={{ display: 'flex', alignItems: 'center', gap: '10px', color: 'rgba(255,255,255,0.6)', fontSize: '14px' }}>
               <FaEnvelope style={{ color: 'var(--color-accent-red)' }} /> info@dhiinfra.com
             </a>
           </div>
