@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import './Hero.css';
 import { FaTimes, FaArrowRight } from 'react-icons/fa';
 
@@ -92,6 +92,11 @@ const dashboardSections = [
 
 export default function Hero() {
   const [activeModal, setActiveModal] = useState(null);
+  const [showMainDashboard, setShowMainDashboard] = useState(false);
+
+  useEffect(() => {
+    setShowMainDashboard(sessionStorage.getItem('showMainDashboard') === 'true');
+  }, []);
 
   const scrollToSection = (id) => {
     const el = document.getElementById(id);
@@ -149,26 +154,28 @@ export default function Hero() {
 
         {/* RIGHT COLUMN: Dashboard Bento Grid */}
         <div className="hero-content-right">
-          <div className="hero-dashboard-grid">
-            {dashboardSections.map((section, idx) => (
-              <button 
-                key={section.id} 
-                className={`hero-dash-card reveal reveal-delay-${(idx % 3) + 1}`}
-                onClick={() => openModal(section)}
-              >
-                <div className="hero-dash-card-content">
-                  <h4>{section.title}</h4>
-                  <p className="line-clamp-3">{section.notes}</p>
-                  <div className="hero-dash-card-action">
-                    Explore <FaArrowRight />
+          {showMainDashboard && (
+            <div className="hero-dashboard-grid">
+              {dashboardSections.map((section, idx) => (
+                <button 
+                  key={section.id} 
+                  className={`hero-dash-card reveal reveal-delay-${(idx % 3) + 1}`}
+                  onClick={() => openModal(section)}
+                >
+                  <div className="hero-dash-card-content">
+                    <h4>{section.title}</h4>
+                    <p className="line-clamp-3">{section.notes}</p>
+                    <div className="hero-dash-card-action">
+                      Explore <FaArrowRight />
+                    </div>
                   </div>
-                </div>
-                <div className="hero-dash-card-thumb">
-                  {section.image && <img src={section.image} alt="" loading="lazy" />}
-                </div>
-              </button>
-            ))}
-          </div>
+                  <div className="hero-dash-card-thumb">
+                    {section.image && <img src={section.image} alt="" loading="lazy" />}
+                  </div>
+                </button>
+              ))}
+            </div>
+          )}
         </div>
 
       </div>

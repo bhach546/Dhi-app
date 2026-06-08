@@ -10,20 +10,9 @@ const contactInfo = [
     title: 'Corporate Office',
     content: (
       <>
-        Delevering Heights INFRA (DHI)<br />
-        Plot No. 12, Sector 18, Industrial Area,<br />
-        Hyderabad, Telangana – 500 001, India
-      </>
-    ),
-  },
-  {
-    id: 'contact-phone',
-    icon: <FaPhone />,
-    title: 'Phone',
-    content: (
-      <>
-        <a href="tel:+919876543210">+91 98765 43210</a><br />
-        <a href="tel:+914023456789">+91 40 2345 6789</a>
+        Plot no 36,37,43,44 Sai Hills<br />
+        Venkataramana Colony,<br />
+        Hyderabad, Telangana – 500085, India
       </>
     ),
   },
@@ -33,8 +22,7 @@ const contactInfo = [
     title: 'Email',
     content: (
       <>
-        <a href="mailto:info@dhiinfra.com">info@dhiinfra.com</a><br />
-        <a href="mailto:projects@dhiinfra.com">projects@dhiinfra.com</a>
+        <a href="mailto:info@dhiinfra.com">info@dh-infra.in</a><br />
       </>
     ),
   },
@@ -44,7 +32,7 @@ const contactInfo = [
     title: 'Business Hours',
     content: (
       <>
-        Monday – Saturday<br />
+        Monday – Friday<br />
         9:00 AM – 7:00 PM IST
       </>
     ),
