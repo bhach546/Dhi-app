@@ -7,7 +7,7 @@ const sections = [
     id: 'about-overview',
     image: '/images/aboutus/Aboutus_Mainpg_.png',
     title: 'Company Overview',
-    notes: 'DH-INFRA is a telecom infrastructure solutions provider specializing in OFC backbone deployment, FTTH & FTTB rollouts, HDD execution, last-mile connectivity, fiber operations, and network maintenance services. We support telecom operators, ISPs, enterprises, government organizations, and infrastructure projects with reliable and scalable connectivity solutions.',
+    notes: 'DELEVERING HEIGHTS INFRA (DH-INFRA) is a trusted telecom infrastructure solutions provider specializing in OFC backbone deployment, FTTH & FTTB rollouts, HDD execution, last-mile connectivity, fiber operations, and network maintenance services. We support telecom operators, ISPs, enterprises, government organizations, and infrastructure projects with reliable and scalable connectivity solutions.',
     detailsTitle: 'Key Highlights',
     details: [
       'OFC Backbone Infrastructure',
@@ -22,7 +22,7 @@ const sections = [
     id: 'about-leadership',
     image: '/images/aboutus/1_aboutus.png',
     title: 'Leadership Vision',
-    notes: 'DH-INFRA is committed to building reliable, scalable, and future-ready telecom infrastructure that supports digital transformation, connectivity expansion, and sustainable growth across communities and industries.',
+    notes: 'DELEVERING HEIGHTS INFRA is committed to building reliable, scalable, and future-ready telecom infrastructure that supports digital transformation, connectivity expansion, and sustainable growth across communities and industries.',
     detailsTitle: 'Vision Focus Areas',
     details: [
       'Customer Success',
@@ -37,7 +37,7 @@ const sections = [
     id: 'about-expertise',
     image: '/images/aboutus/2_aboutus.png',
     title: 'Telecom Expertise',
-    notes: 'DH-INFRA combines skilled manpower, advanced equipment, and proven execution methodologies to successfully deliver telecom infrastructure projects across backbone, access, and last-mile networks.',
+    notes: 'DELEVERING HEIGHTS INFRA combines skilled manpower, advanced equipment, and proven execution methodologies to successfully deliver telecom infrastructure projects across backbone, access, and last-mile networks.',
     detailsTitle: 'Our Areas of Expertise',
     details: [
       'OFC Backbone Infrastructure Deployment',
