@@ -38,7 +38,9 @@
 
 .navbar-logo img {
   width: auto;
-  height: 60px;
+  height: 52px;
+  max-width: 100%;
+  border-radius: 6px;
   object-fit: contain;
   transition: transform var(--transition);
 }
@@ -167,7 +169,7 @@
     gap: 10px;
   }
   .navbar-logo img {
-    height: 50px;
+    height: 44px;
   }
   .navbar-links {
     gap: 2px;
@@ -194,6 +196,6 @@
   }
 
   .navbar-logo img {
-    height: 40px;
+    height: 36px;
   }
 }

@@ -24,6 +24,7 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 28px;
+  align-items: start;
 }
 
 /* ─── CARD ─── */
@@ -34,6 +35,8 @@
   box-shadow: var(--shadow-sm);
   border: 1px solid rgba(0, 0, 0, 0.06);
   transition: box-shadow var(--transition);
+  display: flex;
+  flex-direction: column;
 }
 
 .sol-card:hover {
@@ -44,6 +47,7 @@
 .sol-card-top {
   display: flex;
   flex-direction: column;
+  flex: 1;
 }
 
 .sol-card-image {
@@ -79,9 +83,10 @@
 
 /* Note area below image */
 .sol-card-info {
-  padding: 20px 24px 4px;
+  padding: 20px 24px 16px;
   display: flex;
   flex-direction: column;
+  flex: 1;
 }
 
 .sol-card-title {
@@ -97,11 +102,13 @@
   color: var(--color-text-secondary);
   line-height: 1.75;
   margin: 0;
+  flex: 1;
 }
 
 /* ─── BOTTOM: Two-button tabs & content ─── */
 .sol-card-bottom {
   padding-bottom: 8px;
+  margin-top: auto;
 }
 
 .sol-tabs {
@@ -251,21 +258,19 @@
 }
 
 /* ─── RESPONSIVE ─── */
-@media (max-width: 1200px) {
+@media (max-width: 1024px) {
   .solutions-grid {
     grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (max-width: 900px) {
-  .solutions-grid {
-    grid-template-columns: 1fr;
   }
 }
 
 @media (max-width: 768px) {
   .solutions {
     padding: var(--section-padding-mobile);
+  }
+
+  .solutions-grid {
+    grid-template-columns: 1fr;
   }
 
   .sol-card-image {

@@ -11,6 +11,7 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 28px;
+  align-items: start;
 }
 
 .about-card {
@@ -20,6 +21,8 @@
   box-shadow: var(--shadow-sm);
   border: 1px solid rgba(0, 0, 0, 0.05);
   transition: transform var(--transition), box-shadow var(--transition);
+  display: flex;
+  flex-direction: column;
 }
 
 .about-card:hover {
@@ -45,6 +48,9 @@
 
 .about-card-body {
   padding: 24px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
 }
 
 .about-card-body h3 {
@@ -131,6 +137,8 @@
   font-weight: 600;
   cursor: pointer;
   transition: background var(--transition), transform var(--transition);
+  margin-top: auto;
+  align-self: flex-start;
 }
 
 .about-toggle-btn:hover {

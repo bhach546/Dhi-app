@@ -56,7 +56,7 @@ export default function Navbar() {
         <div className="navbar-inner">
           {/* Logo */}
           <a className="navbar-logo" href="#home" onClick={() => handleNavClick('#home')} aria-label="DHI Home">
-            <img src="/images/company-logo-full.png" alt="Delevering Heights INFRA Logo" className="navbar-logo-full" />
+            <img src="/images/company-logo-full.png" alt="DELEVERING HEIGHTS INFRA Logo" className="navbar-logo-full" />
           </a>
 
           {/* Desktop Links */}

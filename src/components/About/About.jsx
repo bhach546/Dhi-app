@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { FaChevronDown } from 'react-icons/fa';
 import './About.css';
 
@@ -109,8 +109,63 @@ const sections = [
 
 export default function About() {
   const [expanded, setExpanded] = useState({});
+  const [minHeights, setMinHeights] = useState({});
+  const cardRefs = useRef([]);
 
   const toggle = (id) => setExpanded((prev) => ({ ...prev, [id]: !prev[id] }));
+
+  useEffect(() => {
+    const updateHeights = () => {
+      const isMobile = window.innerWidth <= 768;
+      const isTablet = window.innerWidth <= 1024;
+      const cols = isMobile ? 1 : isTablet ? 2 : 3;
+
+      if (cols === 1) {
+        setMinHeights({});
+        return;
+      }
+
+      const heights = {};
+      for (let r = 0; r < sections.length; r += cols) {
+        const rowSlice = sections.slice(r, r + cols);
+        let maxH = 0;
+
+        rowSlice.forEach((_, idx) => {
+          const el = cardRefs.current[r + idx];
+          if (el) {
+            const imgEl = el.querySelector('.about-card-image');
+            const h3El = el.querySelector('h3');
+            const pEl = el.querySelector('.about-card-body > p');
+            const btnEl = el.querySelector('.about-toggle-btn');
+            if (imgEl && h3El && pEl && btnEl) {
+              const collapsedH =
+                imgEl.offsetHeight +
+                48 +
+                h3El.offsetHeight +
+                10 +
+                pEl.offsetHeight +
+                16 +
+                btnEl.offsetHeight;
+              if (collapsedH > maxH) maxH = collapsedH;
+            }
+          }
+        });
+
+        rowSlice.forEach((card) => {
+          if (maxH > 0) heights[card.id] = maxH;
+        });
+      }
+
+      setMinHeights(heights);
+    };
+
+    updateHeights();
+    window.addEventListener('resize', updateHeights);
+    if (document.fonts) {
+      document.fonts.ready.then(updateHeights);
+    }
+    return () => window.removeEventListener('resize', updateHeights);
+  }, []);
 
   return (
     <section className="about" id="about" aria-label="About DH-INFRA section">
@@ -126,6 +181,8 @@ export default function About() {
             className={`about-card reveal reveal-delay-${(i % 3) + 1}`}
             key={card.id}
             id={card.id}
+            ref={(el) => { cardRefs.current[i] = el; }}
+            style={minHeights[card.id] ? { minHeight: `${minHeights[card.id]}px` } : undefined}
           >
             <div className="about-card-image">
               <img src={card.image} alt={card.title} loading="lazy" />

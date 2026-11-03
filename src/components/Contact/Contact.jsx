@@ -22,7 +22,7 @@ const contactInfo = [
     title: 'Email',
     content: (
       <>
-        <a href="mailto:info@dhiinfra.com">info@dh-infra.in</a><br />
+        <a href="mailto:support@dh-infra.in">support@dh-infra.in</a><br />
       </>
     ),
   },

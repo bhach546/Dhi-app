@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { FaChevronDown, FaExclamationTriangle, FaLightbulb } from 'react-icons/fa';
 import './Solutions.css';
 
@@ -254,7 +254,7 @@ const solutions = [
 ];
 
 /* ─── SOLUTION CARD: Left image | Right note | Bottom tabs ─── */
-function SolutionCard({ sol, index }) {
+function SolutionCard({ sol, index, cardRef, minHeight }) {
   const [activeTab, setActiveTab] = useState(null);
 
   const toggleTab = (tab) => {
@@ -265,6 +265,8 @@ function SolutionCard({ sol, index }) {
     <article
       className={`sol-card reveal reveal-delay-${(index % 3) + 1}`}
       id={sol.id}
+      ref={cardRef}
+      style={minHeight ? { minHeight: `${minHeight}px` } : undefined}
     >
       {/* TOP: Image LEFT | Short note RIGHT */}
       <div className="sol-card-top">
@@ -368,6 +370,62 @@ function SolutionCard({ sol, index }) {
 
 /* ─── MAIN EXPORT ─── */
 export default function Solutions() {
+  const [minHeights, setMinHeights] = useState({});
+  const cardRefs = useRef([]);
+
+  useEffect(() => {
+    const updateHeights = () => {
+      const isMobile = window.innerWidth <= 768;
+      const isTablet = window.innerWidth <= 1024;
+      const cols = isMobile ? 1 : isTablet ? 2 : 3;
+
+      if (cols === 1) {
+        setMinHeights({});
+        return;
+      }
+
+      const heights = {};
+      for (let r = 0; r < solutions.length; r += cols) {
+        const rowSlice = solutions.slice(r, r + cols);
+        let maxH = 0;
+
+        rowSlice.forEach((_, idx) => {
+          const el = cardRefs.current[r + idx];
+          if (el) {
+            const imgEl = el.querySelector('.sol-card-image');
+            const titleEl = el.querySelector('.sol-card-title');
+            const noteEl = el.querySelector('.sol-card-note');
+            const tabsEl = el.querySelector('.sol-tabs');
+            if (imgEl && titleEl && noteEl && tabsEl) {
+              const collapsedH =
+                imgEl.offsetHeight +
+                36 +
+                titleEl.offsetHeight +
+                10 +
+                noteEl.offsetHeight +
+                tabsEl.offsetHeight +
+                8;
+              if (collapsedH > maxH) maxH = collapsedH;
+            }
+          }
+        });
+
+        rowSlice.forEach((sol) => {
+          if (maxH > 0) heights[sol.id] = maxH;
+        });
+      }
+
+      setMinHeights(heights);
+    };
+
+    updateHeights();
+    window.addEventListener('resize', updateHeights);
+    if (document.fonts) {
+      document.fonts.ready.then(updateHeights);
+    }
+    return () => window.removeEventListener('resize', updateHeights);
+  }, []);
+
   return (
     <section className="solutions" id="solutions" aria-label="Solutions section">
       <div className="section-title">
@@ -380,7 +438,13 @@ export default function Solutions() {
 
       <div className="solutions-grid">
         {solutions.map((sol, i) => (
-          <SolutionCard key={sol.id} sol={sol} index={i} />
+          <SolutionCard
+            key={sol.id}
+            sol={sol}
+            index={i}
+            cardRef={(el) => { cardRefs.current[i] = el; }}
+            minHeight={minHeights[sol.id]}
+          />
         ))}
       </div>
     </section>

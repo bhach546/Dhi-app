@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { FaChevronDown, FaProjectDiagram, FaTimes } from 'react-icons/fa';
 import './QualitySafety.css';
 
@@ -127,8 +127,63 @@ const safetyStatement = {
 export default function QualitySafety() {
   const [expanded, setExpanded] = useState({});
   const [processFlowImage, setProcessFlowImage] = useState(null);
+  const [minHeights, setMinHeights] = useState({});
+  const cardRefs = useRef([]);
 
   const toggle = (id) => setExpanded((prev) => ({ ...prev, [id]: !prev[id] }));
+
+  useEffect(() => {
+    const updateHeights = () => {
+      const isMobile = window.innerWidth <= 768;
+      const isTablet = window.innerWidth <= 1024;
+      const cols = isMobile ? 1 : isTablet ? 2 : 3;
+
+      if (cols === 1) {
+        setMinHeights({});
+        return;
+      }
+
+      const heights = {};
+      for (let r = 0; r < items.length; r += cols) {
+        const slice = items.slice(r, r + cols);
+        let maxH = 0;
+
+        slice.forEach((_, idx) => {
+          const el = cardRefs.current[r + idx];
+          if (el) {
+            const imgEl = el.querySelector('.quality-row-image');
+            const titleEl = el.querySelector('h3');
+            const descEl = el.querySelector('.quality-row-content > p');
+            const actionsEl = el.querySelector('.quality-actions');
+            if (imgEl && titleEl && descEl && actionsEl) {
+              const collapsedH =
+                imgEl.offsetHeight +
+                46 +
+                titleEl.offsetHeight +
+                10 +
+                descEl.offsetHeight +
+                14 +
+                actionsEl.offsetHeight;
+              if (collapsedH > maxH) maxH = collapsedH;
+            }
+          }
+        });
+
+        slice.forEach((item) => {
+          if (maxH > 0) heights[item.id] = maxH;
+        });
+      }
+
+      setMinHeights(heights);
+    };
+
+    updateHeights();
+    window.addEventListener('resize', updateHeights);
+    if (document.fonts) {
+      document.fonts.ready.then(updateHeights);
+    }
+    return () => window.removeEventListener('resize', updateHeights);
+  }, []);
 
   return (
     <section className="quality" id="quality" aria-label="Quality and Safety section">
@@ -144,6 +199,8 @@ export default function QualitySafety() {
             className={`quality-row reveal reveal-delay-${(i % 3) + 1}`}
             key={item.id}
             id={item.id}
+            ref={(el) => { cardRefs.current[i] = el; }}
+            style={minHeights[item.id] ? { minHeight: `${minHeights[item.id]}px` } : undefined}
           >
             <div className="quality-row-image">
               <img src={item.image} alt={item.title} loading="lazy" />

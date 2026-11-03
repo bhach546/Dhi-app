@@ -84,10 +84,11 @@
 .services-grid {
   display: grid;
   gap: 26px;
+  align-items: start;
 }
 
 .services-grid--primary    { grid-template-columns: repeat(3, 1fr); }
-.services-grid--additional { grid-template-columns: repeat(4, 1fr); }
+.services-grid--additional { grid-template-columns: repeat(3, 1fr); }
 
 /* ─── CARD ─── */
 .svc-card {
@@ -322,10 +323,6 @@
 }
 
 /* ─── RESPONSIVE ─── */
-@media (max-width: 1280px) {
-  .services-grid--additional { grid-template-columns: repeat(3, 1fr); }
-}
-
 @media (max-width: 1024px) {
   .services-grid--primary    { grid-template-columns: repeat(2, 1fr); }
   .services-grid--additional { grid-template-columns: repeat(2, 1fr); }

@@ -25,6 +25,7 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 24px;
+  align-items: start;
   position: relative;
   z-index: 1;
 }
@@ -129,6 +130,7 @@
   display: flex;
   gap: 12px;
   flex-wrap: wrap;
+  margin-top: auto;
 }
 
 .quality-btn {
@@ -276,13 +278,17 @@
 }
 
 /* RESPONSIVE */
-@media (max-width: 1200px) {
+@media (max-width: 1024px) {
   .quality-list {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 
-@media (max-width: 900px) {
+@media (max-width: 768px) {
+  .quality {
+    padding: var(--section-padding-mobile);
+  }
+
   .quality-list {
     grid-template-columns: 1fr;
   }
@@ -294,12 +300,6 @@
   .safety-commitment-image {
     min-height: 200px;
     max-height: 230px;
-  }
-}
-
-@media (max-width: 768px) {
-  .quality {
-    padding: var(--section-padding-mobile);
   }
 
   .quality-row-content {

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { FaChevronDown } from 'react-icons/fa';
 import './Projects.css';
 
@@ -43,8 +43,63 @@ const projects = [
 
 export default function Projects() {
   const [expanded, setExpanded] = useState({});
+  const [minHeights, setMinHeights] = useState({});
+  const cardRefs = useRef([]);
 
   const toggle = (id) => setExpanded((prev) => ({ ...prev, [id]: !prev[id] }));
+
+  useEffect(() => {
+    const updateHeights = () => {
+      const isMobile = window.innerWidth <= 768;
+      const isTablet = window.innerWidth <= 1024;
+      const cols = isMobile ? 1 : isTablet ? 2 : 3;
+
+      if (cols === 1) {
+        setMinHeights({});
+        return;
+      }
+
+      const heights = {};
+      for (let r = 0; r < projects.length; r += cols) {
+        const slice = projects.slice(r, r + cols);
+        let maxH = 0;
+
+        slice.forEach((_, idx) => {
+          const el = cardRefs.current[r + idx];
+          if (el) {
+            const imgEl = el.querySelector('.project-card-image');
+            const titleEl = el.querySelector('h3');
+            const descEl = el.querySelector('.project-card-body > p');
+            const btnEl = el.querySelector('.project-toggle-btn');
+            if (imgEl && titleEl && descEl && btnEl) {
+              const collapsedH =
+                imgEl.offsetHeight +
+                52 +
+                titleEl.offsetHeight +
+                10 +
+                descEl.offsetHeight +
+                20 +
+                btnEl.offsetHeight;
+              if (collapsedH > maxH) maxH = collapsedH;
+            }
+          }
+        });
+
+        slice.forEach((proj) => {
+          if (maxH > 0) heights[proj.id] = maxH;
+        });
+      }
+
+      setMinHeights(heights);
+    };
+
+    updateHeights();
+    window.addEventListener('resize', updateHeights);
+    if (document.fonts) {
+      document.fonts.ready.then(updateHeights);
+    }
+    return () => window.removeEventListener('resize', updateHeights);
+  }, []);
 
   return (
     <section className="projects" id="projects" aria-label="Projects section">
@@ -60,6 +115,8 @@ export default function Projects() {
             className={`project-card reveal reveal-delay-${(i % 4) + 1}`}
             key={proj.id}
             id={proj.id}
+            ref={(el) => { cardRefs.current[i] = el; }}
+            style={minHeights[proj.id] ? { minHeight: `${minHeights[proj.id]}px` } : undefined}
           >
             <div className="project-card-image">
               <img src={proj.image} alt={proj.alt} loading="lazy" />

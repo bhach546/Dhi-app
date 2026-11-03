@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { FaChevronDown, FaTools, FaNetworkWired } from 'react-icons/fa';
 import './Services.css';
 
@@ -225,7 +225,7 @@ const additionalServices = [
 ];
 
 /* ─── CARD: Image top → short note → "View Details" button → expands overview + services + equipment ─── */
-function ServiceCard({ svc, index, isPrimary }) {
+function ServiceCard({ svc, index, isPrimary, cardRef, minHeight }) {
   const [openOverview, setOpenOverview] = useState(false);
   const [openServices, setOpenServices] = useState(false);
 
@@ -233,6 +233,8 @@ function ServiceCard({ svc, index, isPrimary }) {
     <article
       className={`svc-card${isPrimary ? ' svc-card--primary' : ' svc-card--additional'} reveal reveal-delay-${(index % 4) + 1}`}
       id={svc.id}
+      ref={cardRef}
+      style={minHeight ? { minHeight: `${minHeight}px` } : undefined}
     >
       {/* IMAGE */}
       <div className="svc-card-image">
@@ -325,6 +327,63 @@ function ServiceCard({ svc, index, isPrimary }) {
 
 /* ─── MAIN EXPORT ─── */
 export default function Services() {
+  const [primaryHeights, setPrimaryHeights] = useState({});
+  const [additionalHeights, setAdditionalHeights] = useState({});
+  const primaryRefs = useRef([]);
+  const additionalRefs = useRef([]);
+
+  useEffect(() => {
+    const updateHeights = () => {
+      const w = window.innerWidth;
+      const isMobile = w <= 768;
+      const isTablet = w <= 1024;
+      const cols = isMobile ? 1 : isTablet ? 2 : 3;
+
+      const calcGridHeights = (items, refs) => {
+        if (cols === 1) return {};
+        const heights = {};
+        for (let r = 0; r < items.length; r += cols) {
+          const slice = items.slice(r, r + cols);
+          let maxH = 0;
+          slice.forEach((_, idx) => {
+            const el = refs.current[r + idx];
+            if (el) {
+              const imgEl = el.querySelector('.svc-card-image');
+              const titleEl = el.querySelector('.svc-card-title');
+              const noteEl = el.querySelector('.svc-card-note');
+              const actionsEl = el.querySelector('.svc-card-actions');
+              if (imgEl && titleEl && noteEl && actionsEl) {
+                const collapsedH =
+                  imgEl.offsetHeight +
+                  42 +
+                  titleEl.offsetHeight +
+                  10 +
+                  noteEl.offsetHeight +
+                  16 +
+                  actionsEl.offsetHeight;
+                if (collapsedH > maxH) maxH = collapsedH;
+              }
+            }
+          });
+          slice.forEach((item) => {
+            if (maxH > 0) heights[item.id] = maxH;
+          });
+        }
+        return heights;
+      };
+
+      setPrimaryHeights(calcGridHeights(primaryServices, primaryRefs));
+      setAdditionalHeights(calcGridHeights(additionalServices, additionalRefs));
+    };
+
+    updateHeights();
+    window.addEventListener('resize', updateHeights);
+    if (document.fonts) {
+      document.fonts.ready.then(updateHeights);
+    }
+    return () => window.removeEventListener('resize', updateHeights);
+  }, []);
+
   return (
     <section className="services" id="services" aria-label="Services section">
 
@@ -354,7 +413,14 @@ export default function Services() {
 
       <div className="services-grid services-grid--primary">
         {primaryServices.map((svc, i) => (
-          <ServiceCard key={svc.id} svc={svc} index={i} isPrimary={true} />
+          <ServiceCard
+            key={svc.id}
+            svc={svc}
+            index={i}
+            isPrimary={true}
+            cardRef={(el) => { primaryRefs.current[i] = el; }}
+            minHeight={primaryHeights[svc.id]}
+          />
         ))}
       </div>
 
@@ -367,7 +433,14 @@ export default function Services() {
 
       <div className="services-grid services-grid--additional">
         {additionalServices.map((svc, i) => (
-          <ServiceCard key={svc.id} svc={svc} index={i} isPrimary={false} />
+          <ServiceCard
+            key={svc.id}
+            svc={svc}
+            index={i}
+            isPrimary={false}
+            cardRef={(el) => { additionalRefs.current[i] = el; }}
+            minHeight={additionalHeights[svc.id]}
+          />
         ))}
       </div>
 

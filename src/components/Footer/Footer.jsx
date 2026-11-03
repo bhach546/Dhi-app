@@ -43,7 +43,7 @@ export default function Footer() {
           <div className="footer-logo">
             <img src="/logo.png" alt="DHI Logo" />
             <div className="footer-logo-text">
-              <h2>Delevering Heights <span>INFRA</span></h2>
+              <h2>DELEVERING HEIGHTS <span>INFRA</span></h2>
             </div>
           </div>
           <p>
@@ -65,8 +65,8 @@ export default function Footer() {
             ))}
           </div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '6px', marginTop: '8px' }}>
-            <a href="mailto:info@dh-infra.com" style={{ display: 'flex', alignItems: 'center', gap: '10px', color: 'rgba(255,255,255,0.6)', fontSize: '14px' }}>
-              <FaEnvelope style={{ color: 'var(--color-accent-red)' }} /> info@dhiinfra.com
+            <a href="mailto:support@dh-infra.in" style={{ display: 'flex', alignItems: 'center', gap: '10px', color: 'rgba(255,255,255,0.6)', fontSize: '14px' }}>
+              <FaEnvelope style={{ color: 'var(--color-accent-red)' }} /> support@dh-infra.in
             </a>
           </div>
         </div>
@@ -102,7 +102,7 @@ export default function Footer() {
       {/* Bottom Bar */}
       <div className="footer-bottom">
         <p>
-          © {year} <span>Delevering Heights INFRA (DHI)</span>. All Rights Reserved.
+          © {year} <span>DELEVERING HEIGHTS INFRA</span>. All Rights Reserved.
         </p>
         <p>
           Connecting Communities, Building Networks
